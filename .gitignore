@@ -14,3 +14,5 @@
 
 /config/database.yml
 /vendor/ruby
+
+logfile
