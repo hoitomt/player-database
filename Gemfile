@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.4'
+
 gem 'rails', '4.2.3'
 gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.4'
@@ -14,6 +16,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 
 gem 'rack-cors', :require => 'rack/cors'
+
+gem 'puma'
+
+group :production do 
+	gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'byebug'
