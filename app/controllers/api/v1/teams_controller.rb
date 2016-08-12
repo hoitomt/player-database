@@ -6,6 +6,11 @@ module Api
         render json: @teams.to_json(include: :players)
       end
 
+      def show
+        @team = Team.find_by_id(params[:id])
+        render json: @team.to_json(include: :players)
+      end
+
       def create
         @team = Team.create_with_players(team_user_params, team_player_params)
         if @team.valid?

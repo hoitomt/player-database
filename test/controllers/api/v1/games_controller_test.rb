@@ -43,7 +43,7 @@ describe Api::V1::GamesController do
         {
           opponent: 'Buckeyes',
           date: '2015-09-30',
-          players: [
+          box_scores: [
             {
               id: nil,
               player_id: player1.id,
@@ -108,7 +108,7 @@ describe Api::V1::GamesController do
       {
         opponent: 'Updated Name',
         date: game.date,
-        players: [
+        box_scores: [
           {
             id: nil,
             player_id: player1.id,

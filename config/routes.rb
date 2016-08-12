@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :authentication, only: [:create, :index]
-      resources :teams, only: [:index, :create, :update] do
+      resources :teams, only: [:index, :create, :update, :show] do
         resources :games, only: [:create, :index, :update]
+        resources :players, only: [:index, :show]
       end
       resources :users, only: [:create]
     end

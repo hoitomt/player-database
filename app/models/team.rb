@@ -10,10 +10,6 @@ class Team < ActiveRecord::Base
     team
   end
 
-  # def to_json
-  #   self.to_json(include: :players)
-  # end
-
   def add_players(players_params=[])
     players_params.each do |player_params|
       self.players << Player.create!(player_params)
