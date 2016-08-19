@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :authentication, only: [:create, :index]
       resources :teams, only: [:index, :create, :update, :show] do
         resources :games, only: [:create, :index, :update]
-        resources :players, only: [:index, :show, :create, :update]
+        resources :players, only: [:index, :show, :create, :update, :destroy]
       end
       resources :users, only: [:create]
     end

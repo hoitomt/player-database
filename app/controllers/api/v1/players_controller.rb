@@ -24,6 +24,12 @@ module Api
         render json: @player.to_json
       end
 
+      def destroy
+        @player = @team.players.find_by_id(params[:id])
+        @player.destroy
+        render json: {}
+      end
+
       private
 
       def player_params

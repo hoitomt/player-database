@@ -78,4 +78,19 @@ describe Api::V1::PlayersController do
       response_body['number'].must_equal 35
     end
   end
+
+  describe 'DELETE update' do
+    let!(:player){ create :player, team_id: team.id, name: 'Kevin Duxant', number: 39}
+
+    it 'responds successfully' do
+      delete :destroy, team_id: team.id, id: player.id
+      assert_response :success
+    end
+
+    it 'updates the player information' do
+      -> {
+        delete :destroy, team_id: team.id, id: player.id
+      }.must_change 'Player.count', -1
+    end
+  end
 end
