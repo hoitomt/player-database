@@ -18,6 +18,12 @@ module Api
         render json: @player.to_json
       end
 
+      def update
+        @player = @team.players.find_by_id(params[:id])
+        @player.update_attributes(player_params)
+        render json: @player.to_json
+      end
+
       private
 
       def player_params

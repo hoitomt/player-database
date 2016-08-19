@@ -8,6 +8,8 @@ describe Api::V1::PlayersController do
     @request.headers['Authorization'] = "Token token=\"#{user.access_token}\""
   end
 
+  let(:response_body){JSON.parse(response.body)}
+
   describe 'POST create' do
     let(:params) {
       {
@@ -15,7 +17,6 @@ describe Api::V1::PlayersController do
         number: '35'
       }
     }
-    let(:response_body){JSON.parse(response.body)}
 
     it 'responds successfully' do
       post :create, team_id: team.id, player: params
@@ -60,6 +61,21 @@ describe Api::V1::PlayersController do
       response.body.must_include 'Steph Curry'
       response.body.must_include 'Kevin Durant'
       response.body.wont_include 'LeBron James'
+    end
+  end
+
+  describe 'PUT update' do
+    let(:player){ create :player, team_id: team.id, name: 'Kevin Duxant', number: 39}
+
+    it 'responds successfully' do
+      put :update, team_id: team.id, id: player.id, player: {name: 'Kevin Durant', number: 35}
+      assert_response :success
+    end
+
+    it 'updates the player information' do
+      put :update, team_id: team.id, id: player.id, player: {name: 'Kevin Durant', number: 35}
+      response_body['name'].must_equal 'Kevin Durant'
+      response_body['number'].must_equal 35
     end
   end
 end
