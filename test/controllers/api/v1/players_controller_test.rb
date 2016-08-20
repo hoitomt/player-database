@@ -14,7 +14,12 @@ describe Api::V1::PlayersController do
     let(:params) {
       {
         name: 'Kevin Durant',
-        number: '35'
+        number: '35',
+        height_feet: '6',
+        height_inches: '11',
+        position: 'PG',
+        school: 'Texas',
+        year: '2005'
       }
     }
 
@@ -33,13 +38,25 @@ describe Api::V1::PlayersController do
       post :create, team_id: team.id, player: params
       response_body['name'].must_equal params[:name]
       response_body['number'].must_equal params[:number].to_i
+      response_body['height_feet'].must_equal params[:height_feet].to_i
+      response_body['height_inches'].must_equal params[:height_inches].to_i
+      response_body['position'].must_equal params[:position]
+      response_body['school'].must_equal params[:school]
+      response_body['year'].must_equal params[:year]
     end
 
     it 'adds a player to the team' do
       post :create, team_id: team.id, player: params
       player = team.reload.players.last
-      player.name.must_equal 'Kevin Durant'
-      player.number.must_equal 35
+
+      player.name.must_equal params[:name]
+      player.number.must_equal params[:number].to_i
+      player.height_feet.must_equal params[:height_feet].to_i
+      player.height_inches.must_equal params[:height_inches].to_i
+      player.position.must_equal params[:position]
+      player.school.must_equal params[:school]
+      player.year.must_equal params[:year]
+
       player.team_id.must_equal team.id
     end
   end

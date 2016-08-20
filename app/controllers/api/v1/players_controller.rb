@@ -33,7 +33,8 @@ module Api
       private
 
       def player_params
-        params.require(:player).permit(:name, :number)
+        params.require(:player).permit(:name, :number,
+          :height_feet, :height_inches, :position, :school, :year)
       end
 
       def find_team
