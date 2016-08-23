@@ -61,6 +61,20 @@ describe Api::V1::PlayersController do
     end
   end
 
+  describe 'GET show' do
+    let(:player) { create :player, team: team}
+
+    it 'team and players route responds successfully' do
+      get :show, team_id: team.id, id: player.id
+      assert_response :success
+    end
+
+    it 'players route responds successfully' do
+      get :show, id: player.id
+      assert_response :success
+    end
+  end
+
   describe 'GET index' do
     let(:team2) { create :team }
 

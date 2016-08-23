@@ -9,7 +9,7 @@ module Api
       end
 
       def show
-        @player = @team.players.find_by_id(params[:id])
+        @player = Player.find_by_id(params[:id])
         render json: @player.to_json
       end
 

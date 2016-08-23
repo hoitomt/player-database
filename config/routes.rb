@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get 'players/:id' => 'players#show'
+
       resources :authentication, only: [:create, :index]
       resources :teams, only: [:index, :create, :update, :show] do
         resources :games, only: [:create, :index, :update]
