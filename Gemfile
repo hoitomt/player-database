@@ -19,7 +19,10 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'puma'
 
-group :production do 
+gem 'carrierwave'
+gem 'fog'
+
+group :production do
 	gem 'rails_12factor'
 end
 

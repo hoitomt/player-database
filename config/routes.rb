@@ -13,6 +13,10 @@ Rails.application.routes.draw do
         resources :players, only: [:index, :show, :create, :update, :destroy]
       end
       resources :users, only: [:create]
+
+      namespace :media do
+        post 'upload_photo'
+      end
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

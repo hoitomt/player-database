@@ -5,22 +5,24 @@ module Api
 
       def index
         @players = @team.players
-        render json: @players.to_json
+        render json: @players.to_json(include: :profile_photo)
       end
 
       def show
         @player = Player.find_by_id(params[:id])
-        render json: @player.to_json
+        render json: @player.to_json(include: :profile_photo)
       end
 
       def create
         @player = @team.players.create(player_params)
+        @player.set_profile_photo(params[:player][:photo_id])
         render json: @player.to_json
       end
 
       def update
         @player = @team.players.find_by_id(params[:id])
         @player.update_attributes(player_params)
+        @player.set_profile_photo(params[:player][:photo_id])
         render json: @player.to_json
       end
 
