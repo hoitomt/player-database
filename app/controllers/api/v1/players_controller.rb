@@ -15,16 +15,14 @@ module Api
 
       def create
         @player = @team.players.create(player_params)
-        if params[:player][:photo_id]
-          @player.set_profile_photo(params[:player][:photo_id])
-        end
+        add_or_update_profile_photo
         render json: @player.to_json
       end
 
       def update
         @player = @team.players.find_by_id(params[:id])
         @player.update_attributes(player_params)
-        @player.set_profile_photo(params[:player][:photo_id])
+        add_or_update_profile_photo
         render json: @player.to_json
       end
 
@@ -35,6 +33,12 @@ module Api
       end
 
       private
+
+      def add_or_update_profile_photo
+        if params[:player][:profile_photo]
+          @player.set_profile_photo(params[:player][:profile_photo][:id])
+        end
+      end
 
       def player_params
         params.require(:player).permit(:name, :number,
