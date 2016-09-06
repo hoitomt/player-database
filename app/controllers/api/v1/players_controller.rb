@@ -15,7 +15,9 @@ module Api
 
       def create
         @player = @team.players.create(player_params)
-        @player.set_profile_photo(params[:player][:photo_id])
+        if params[:player][:photo_id]
+          @player.set_profile_photo(params[:player][:photo_id])
+        end
         render json: @player.to_json
       end
 
