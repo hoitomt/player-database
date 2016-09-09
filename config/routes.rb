@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'main#index'
   resources :users
+  resources :teams
 
   namespace :api do
     namespace :v1 do

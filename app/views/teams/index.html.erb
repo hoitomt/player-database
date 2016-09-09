@@ -1,0 +1,23 @@
+<div class="row" style="margin-top: 10px;">
+  <p class="pull-right"><%= link_to 'New', new_team_path, "class" => "btn btn-success" %></p>
+</div>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Slug</th>
+    <th></th>
+  </tr>
+  <% @teams.each do |team| %>
+    <tr>
+      <td><%= team.name %></td>
+      <td><%= team.slug %></td>
+      <td>
+        <div class="pull-right">
+          <%= link_to 'Edit', edit_team_path(team), "class" => "btn btn-primary" %>
+          <%= link_to 'Delete', team_path(team), method: :delete, "class" => "btn btn-danger" %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  <tr></tr>
+</table>

@@ -10,7 +10,7 @@ module Api
 
       def show
         @player = Player.find_by_id(params[:id])
-        render json: @player.to_json(include: :profile_photo)
+        render json: @player.to_json(include: [:profile_photo, :team])
       end
 
       def create
