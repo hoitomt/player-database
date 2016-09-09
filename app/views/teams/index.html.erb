@@ -5,12 +5,14 @@
   <tr>
     <th>Name</th>
     <th>Slug</th>
+    <th>WordPress Team Page Snippet</th>
     <th></th>
   </tr>
   <% @teams.each do |team| %>
     <tr>
       <td><%= team.name %></td>
       <td><%= team.slug %></td>
+      <td><%= %{<div id="js-team-id" data-team_id=#{team.id}></div>} %></td>
       <td>
         <div class="pull-right">
           <%= link_to 'Edit', edit_team_path(team), "class" => "btn btn-primary" %>
