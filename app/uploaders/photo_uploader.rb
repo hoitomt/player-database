@@ -41,7 +41,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   def fix_exif_rotation #this is my attempted solution
     manipulate! do |img|
-      img.tap(&:auto_orient)
+      img.tap(&:auto_orient!)
     end
   end
 
