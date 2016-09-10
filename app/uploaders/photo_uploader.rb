@@ -39,6 +39,10 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process resize_to_fit: [50, 50]
   end
 
+  version :medium do
+    process resize_to_fit: [512, 512]
+  end
+
   def fix_exif_rotation #this is my attempted solution
     manipulate! do |img|
       img.tap(&:auto_orient!)
