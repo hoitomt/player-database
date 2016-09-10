@@ -21,7 +21,8 @@ gem 'puma'
 
 gem 'carrierwave'
 gem 'fog'
-gem 'mini_magick', '3.8.0'
+# gem 'mini_magick', '3.8.0'
+gem 'rmagick'
 
 group :production do
 	gem 'rails_12factor'
