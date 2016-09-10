@@ -30,12 +30,12 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   version :profile do
-    process resize_to_fit: [200, nil]
+    process resize_to_fit: [200, 200]
   end
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process resize_to_fit: [50, nil]
+    process resize_to_fit: [50, 50]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
