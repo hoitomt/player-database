@@ -40,7 +40,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :medium do
-    process resize_to_fit: [512, 512]
+    process resize_to_fit: [800, 800]
   end
 
   def fix_exif_rotation #this is my attempted solution
