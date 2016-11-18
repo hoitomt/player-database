@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   def index
-    @teams = current_user.teams
+    @teams = Team.all
   end
 
   def new
@@ -8,7 +8,8 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = current_user.teams.create(team_params)
+    t_params = team_params.merge({user_id: current_user.id})
+    @team = Team.create(t_params)
     if @team.valid?
       flash[:success] = "#{@team.name} has been created"
       redirect_to teams_path
