@@ -1,0 +1,23 @@
+<div class="row" style="margin-top: 20px;">
+  <%= form_for [@team, @player], html: {class: 'form-horizontal'} do |f| %>
+    <div class="form-group">
+      <%= f.label :number, class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :number %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :name, class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <%= link_to 'Cancel', team_players_path(@team), class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

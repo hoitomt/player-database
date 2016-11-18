@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe Api::V1::GamesController do
   let(:user) { create :user}
@@ -22,17 +22,17 @@ describe Api::V1::GamesController do
     end
 
     it 'adds a game' do
-      -> {
+      expect{
         post :create, team_id: team.id, game: params
-      }.must_change 'Game.count', +1
+      }.to change{Game.count}.by(1)
     end
 
     it 'adds a game to the team' do
       post :create, team_id: team.id, game: params
       game = team.reload.games.last
-      game.opponent.must_equal 'Buckeyes'
-      game.date.must_equal Date.new(2015, 9, 30)
-      game.team_id.must_equal team.id
+      expect(game.opponent).to eq 'Buckeyes'
+      expect(game.date).to eq Date.new(2015, 9, 30)
+      expect(game.team_id).to eq team.id
     end
 
     describe 'POST create with box_scores' do
@@ -77,23 +77,23 @@ describe Api::V1::GamesController do
       }
 
       it 'adds a game' do
-        -> {
+        expect{
           post :create, team_id: team.id, game: params
-        }.must_change 'Game.count', +1
+        }.to change{Game.count}.by(1)
       end
 
       it 'adds box_scores to the game' do
-        -> {
+        expect{
           post :create, team_id: team.id, game: params
-        }.must_change 'BoxScore.count', +2
+        }.to change{BoxScore.count}.by(2)
       end
 
       it 'adds a game to the team' do
         post :create, team_id: team.id, game: params
         game = team.reload.games.last
-        game.opponent.must_equal 'Buckeyes'
-        game.date.must_equal Date.new(2015, 9, 30)
-        game.team_id.must_equal team.id
+        expect(game.opponent).to eq 'Buckeyes'
+        expect(game.date).to eq Date.new(2015, 9, 30)
+        expect(game.team_id).to eq team.id
       end
     end
 
@@ -148,7 +148,7 @@ describe Api::V1::GamesController do
 
     it 'updates the value' do
       put :update, team_id: team.id, id: game.id, game: params
-      game.reload.opponent.must_equal 'Updated Name'
+      expect(game.reload.opponent).to eq 'Updated Name'
     end
 
     it 'with invalid game id' do
@@ -158,27 +158,27 @@ describe Api::V1::GamesController do
 
     describe 'box score' do
       it 'create new box score records' do
-        -> {
+        expect{
           put :update, team_id: team.id, id: game.id, game: params
-        }.must_change 'BoxScore.count', +2
+        }.to change{BoxScore.count}.by(2)
       end
 
       it 'correctly populates box score' do
         put :update, team_id: team.id, id: game.id, game: params
         box_scores = player1.reload.box_scores
-        box_scores.length.must_equal 1
+        expect(box_scores.length).to eq 1
         box_score = box_scores.first
 
-        box_score.one_point_attempt.must_equal 3
-        box_score.one_point_make.must_equal 2
-        box_score.two_point_attempt.must_equal 4
-        box_score.two_point_make.must_equal 2
-        box_score.three_point_attempt.must_equal 6
-        box_score.three_point_make.must_equal 4
-        box_score.turnovers.must_equal 1
-        box_score.assists.must_equal 3
-        box_score.fouls.must_equal 2
-        box_score.rebounds.must_equal 5
+        expect(box_score.one_point_attempt).to eq 3
+        expect(box_score.one_point_make).to eq 2
+        expect(box_score.two_point_attempt).to eq 4
+        expect(box_score.two_point_make).to eq 2
+        expect(box_score.three_point_attempt).to eq 6
+        expect(box_score.three_point_make).to eq 4
+        expect(box_score.turnovers).to eq 1
+        expect(box_score.assists).to eq 3
+        expect(box_score.fouls).to eq 2
+        expect(box_score.rebounds).to eq 5
       end
     end
 
@@ -187,24 +187,24 @@ describe Api::V1::GamesController do
       let!(:player2_box_score){ create :box_score, player: player2, game: game }
 
       it 'updates an existing box_score' do
-        -> {
+        expect{
           put :update, team_id: team.id, id: game.id, game: params
-        }.must_change 'BoxScore.count', +0
+        }.to change{BoxScore.count}.by(0)
       end
 
       it 'updates an existing box_score' do
         put :update, team_id: team.id, id: game.id, game: params
         player2_box_score.reload
-        player2_box_score.one_point_attempt.must_equal 6
-        player2_box_score.one_point_make.must_equal 3
-        player2_box_score.two_point_attempt.must_equal 7
-        player2_box_score.two_point_make.must_equal 2
-        player2_box_score.three_point_attempt.must_equal 4
-        player2_box_score.three_point_make.must_equal 2
-        player2_box_score.turnovers.must_equal 2
-        player2_box_score.assists.must_equal 4
-        player2_box_score.fouls.must_equal 3
-        player2_box_score.rebounds.must_equal 7
+        expect(player2_box_score.one_point_attempt).to eq 6
+        expect(player2_box_score.one_point_make).to eq 3
+        expect(player2_box_score.two_point_attempt).to eq 7
+        expect(player2_box_score.two_point_make).to eq 2
+        expect(player2_box_score.three_point_attempt).to eq 4
+        expect(player2_box_score.three_point_make).to eq 2
+        expect(player2_box_score.turnovers).to eq 2
+        expect(player2_box_score.assists).to eq 4
+        expect(player2_box_score.fouls).to eq 3
+        expect(player2_box_score.rebounds).to eq 7
       end
 
     end

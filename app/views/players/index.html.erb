@@ -1,0 +1,26 @@
+<div class="row" style="margin-top: 10px;">
+  <h2><%= @team.name %> Players</h2>
+  <p class="pull-right"><%= link_to 'New', new_team_player_path(@team), "class" => "btn btn-success" %></p>
+</div>
+<table class="table">
+  <tr>
+    <th>Number</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= player.number %></td>
+      <td><%= player.name %></td>
+      <td></td>
+      <td>
+        <div class="pull-right">
+          <%= link_to 'Box Scores', team_player_box_scores_path(@team, player), "class" => "btn btn-primary" %>
+          <%= link_to 'Edit', edit_team_player_path(@team, player), "class" => "btn btn-primary" %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  <tr></tr>
+</table>

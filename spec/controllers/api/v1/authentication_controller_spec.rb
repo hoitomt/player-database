@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe Api::V1::AuthenticationController do
   let!(:user){ create :user }
@@ -19,8 +19,8 @@ describe Api::V1::AuthenticationController do
 
       it 'responds with an api_key' do
         post :create, {user: {email: user.email, password: user.password}}
-        JSON.parse(response.body)['api_key'].must_equal user.reload.api_key.access_token
-        JSON.parse(response.body)['user_id'].must_equal user.reload.id
+        expect(JSON.parse(response.body)['api_key']).to eq user.reload.api_key.access_token
+        expect(JSON.parse(response.body)['user_id']).to eq user.reload.id
       end
     end
   end

@@ -1,0 +1,32 @@
+<div class="row" style="margin-top: 10px;">
+  <h2><%= @player.name %> Box Scores</h2>
+  <p class="pull-right"><%= link_to 'New', new_team_player_box_score_path(@team, @player), "class" => "btn btn-success" %></p>
+</div>
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Opponent</th>
+    <th>FG</th>
+    <th>3PT</th>
+    <th>FT</th>
+    <th>PTS</th>
+    <th></th>
+  </tr>
+  <% @box_scores.each do |box_score| %>
+    <% game = box_score.game %>
+    <tr>
+      <td><%= display_date(game.date) %></td>
+      <td><%= game.opponent %></td>
+      <td><%= box_score.two_point_make %>/<%= box_score.two_point_attempt %></td>
+      <td><%= box_score.three_point_make %>/<%= box_score.three_point_attempt %></td>
+      <td><%= box_score.one_point_make %>/<%= box_score.one_point_attempt %></td>
+      <td><%= box_score.total_points %></td>
+      <td>
+        <div class="pull-right">
+          <%= link_to 'Edit', edit_team_player_box_score_path(@team, @player, box_score), "class" => "btn btn-primary" %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  <tr></tr>
+</table>

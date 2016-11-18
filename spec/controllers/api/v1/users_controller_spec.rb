@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe Api::V1::UsersController do
 
@@ -19,15 +19,15 @@ describe Api::V1::UsersController do
       end
 
       it 'creates a new user' do
-        -> {
+        expect {
           post :create, {user: params}
-        }.must_change "User.count", +1
+        }.to change{User.count}.by(1)
       end
 
       it 'responds with an api_key' do
         post :create, {user: params}
-        JSON.parse(response.body)['api_key'].wont_be_nil
-        JSON.parse(response.body)['user_id'].wont_be_nil
+        expect(JSON.parse(response.body)['api_key']).to_not be_nil
+        expect(JSON.parse(response.body)['user_id']).to_not be_nil
       end
     end
 

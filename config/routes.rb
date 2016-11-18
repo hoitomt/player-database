@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'ping' => 'main#ping'
   resources :users
-  resources :teams
+  resources :teams do
+    resources :players do
+      resources :box_scores
+    end
+  end
 
   namespace :api do
     namespace :v1 do

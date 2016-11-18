@@ -1,0 +1,76 @@
+<div class="row" style="margin-top: 20px;">
+  <%= form_for [team, player, box_score], html: {class: 'form-horizontal'} do |f| %>
+    <div class="form-group">
+      <%= label_tag 'game', 'Game', class: "col-sm-2 control-label" %>
+      <div class="col-sm-2">
+        <%= text_field_tag 'box_score_date', display_date(box_score.date), placeholder: 'Date', class: "datepicker form-control" %>
+      </div>
+      <div class="col-sm-2">
+        <%= text_field_tag 'box_score_opponent', box_score.opponent, placeholder: 'Opponent', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :total_points, class: "col-sm-2 control-label" %>
+      <div class="col-sm-1">
+        <%= f.text_field :total_points, placeholder: 'Total', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :assists, class: "col-sm-2 control-label" %>
+      <div class="col-sm-1">
+        <%= f.text_field :assists, placeholder: 'Assists', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :rebounds, class: "col-sm-2 control-label" %>
+      <div class="col-sm-1">
+        <%= f.text_field :rebounds, placeholder: 'Reb.', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-1">Makes</div>
+      <div class="col-sm-1">Attempts</div>
+    </div>
+    <div class="form-group">
+      <%= f.label :two_point_attempt, 'Two Point Field Goals', class: "col-sm-2 control-label" %>
+      <div class="col-sm-1">
+        <%= f.text_field :two_point_make, placeholder: 'Makes', class: "form-control" %>
+      </div>
+      <div class="col-sm-1">
+        <%= f.text_field :two_point_attempt, placeholder: 'Att.', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :three_point_attempt, 'Three Point Field Goals', class: "col-sm-2 control-label" %>
+      <div class="col-sm-1">
+        <%= f.text_field :three_point_make, placeholder: 'Makes', class: "form-control" %>
+      </div>
+      <div class="col-sm-1">
+        <%= f.text_field :three_point_attempt, placeholder: 'Att.', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :one_point_attempt, 'Free Throws', class: "col-sm-2 control-label" %>
+      <div class="col-sm-1">
+        <%= f.text_field :one_point_make, placeholder: 'Makes', class: "form-control" %>
+      </div>
+      <div class="col-sm-1">
+        <%= f.text_field :one_point_attempt, placeholder: 'Att.', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <%= link_to 'Cancel', team_player_box_scores_path(team, player), class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      autoclose: true
+    });
+  });
+</script>

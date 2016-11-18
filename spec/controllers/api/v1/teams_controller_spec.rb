@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe Api::V1::TeamsController do
   let(:user) { create :user}
@@ -20,15 +20,15 @@ describe Api::V1::TeamsController do
     end
 
     it 'adds a team' do
-      -> {
+      expect{
         post :create, team: params
-      }.must_change 'Team.count', +1
+      }.to change{Team.count}.by(1)
     end
 
     it 'adds a team to the user' do
       post :create, team: params
       team = user.reload.teams.last
-      team.name.must_equal 'Badgers'
+      expect(team.name).to eq 'Badgers'
     end
 
     describe 'players' do
@@ -50,21 +50,21 @@ describe Api::V1::TeamsController do
       }
 
       it 'adds players to the team' do
-        -> {
+        expect{
           post :create, team: params
-        }.must_change 'Player.count', +2
+        }.to change{Player.count}.by(2)
       end
 
       it 'add the correct players to the team' do
         post :create, team: params
-        team.reload.players.find_by_name('Stephen Curry').number.must_equal 30
-        team.reload.players.find_by_name('Lebron James').number.must_equal 23
+        expect(team.reload.players.find_by_name('Stephen Curry').number).to eq 30
+        expect(team.reload.players.find_by_name('Lebron James').number).to eq 23
       end
 
       it 'returns the players in the response' do
         post :create, team: params
         j_response = JSON.parse(response.body)
-        j_response['players'].length.must_equal 2
+        expect(j_response['players'].length).to eq 2
       end
     end
   end
@@ -85,7 +85,7 @@ describe Api::V1::TeamsController do
 
     it 'updates the value' do
       put :update, id: team.id, team: params
-      team.reload.name.must_equal 'Updated Name'
+      expect(team.reload.name).to eq 'Updated Name'
     end
 
     it 'with invalid team id' do
@@ -121,19 +121,19 @@ describe Api::V1::TeamsController do
 
       it 'updates the players' do
         put :update, id: team.id, team: params
-        steph.reload.number.must_equal 44
+        expect(steph.reload.number).to eq 44
       end
 
       it 'adds new players' do
-        -> {
+        expect{
           put :update, id: team.id, team: params
-        }.must_change 'Player.count', +1
+        }.to change{Player.count}.by(1)
       end
 
       it 'adds new players to the team' do
         put :update, id: team.id, team: params
-        team.reload.players.count.must_equal 3
-        Player.find_by_name('Klay Thompson').team.must_equal team
+        expect(team.reload.players.count).to eq 3
+        expect(Player.find_by_name('Klay Thompson').team).to eq team
       end
     end
   end

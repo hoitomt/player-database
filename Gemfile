@@ -24,6 +24,9 @@ gem 'fog'
 # gem 'mini_magick', '3.8.0'
 gem 'rmagick'
 
+# https://github.com/Nerian/bootstrap-datepicker-rails
+gem 'bootstrap-datepicker-rails'
+
 group :production do
 	gem 'rails_12factor'
 end
@@ -32,12 +35,11 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
 
-  gem 'minitest-rails'
-  gem 'minitest-reporters'
-  gem 'minitest-bang', require: false
+  gem 'rspec-rails'
   gem 'quiet_assets'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'better_errors'
 end
 
 group :doc do

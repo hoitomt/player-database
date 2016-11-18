@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe Api::V1::TeamsController do
   let(:user) { create :user}

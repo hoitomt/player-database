@@ -1,4 +1,4 @@
-require "test_helper"
+require "rails_helper"
 
 describe ApiKey do
   let(:api_key){ build :api_key }

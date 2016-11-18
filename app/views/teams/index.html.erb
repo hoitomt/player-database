@@ -15,6 +15,7 @@
       <td><%= %{<div id="js-team-id" data-team_id=#{team.id}></div>} %></td>
       <td>
         <div class="pull-right">
+          <%= link_to 'Players', team_players_path(team), "class" => "btn btn-success" %>
           <%= link_to 'Edit', edit_team_path(team), "class" => "btn btn-primary" %>
           <%= link_to 'Delete', team_path(team), method: :delete, "class" => "btn btn-danger" %>
         </div>

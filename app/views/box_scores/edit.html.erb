@@ -1,0 +1,3 @@
+<h1><%= @player.name %>: <%= @box_score.opponent %> on <%= display_date(@box_score.date) %></h1>
+
+<%= render partial: 'form', locals: {player: @player, team: @player.team, box_score: @box_score} %>

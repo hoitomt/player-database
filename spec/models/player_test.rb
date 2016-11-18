@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe "Player" do
   let(:team){ create :team }
@@ -6,7 +6,7 @@ describe "Player" do
 
   describe 'uniqueness' do
     it 'will not create another player on the same team with the same name and number' do
-      Player.new({name: player.name, number: player.number, team: team}).valid?.must_equal false
+      expect(Player.new({name: player.name, number: player.number, team: team}).valid?).to eq false
     end
   end
 end
