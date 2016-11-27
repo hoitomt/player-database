@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         resources :players, only: [:index, :show, :create, :update, :destroy]
       end
       resources :users, only: [:create]
+      resources :box_scores, only: [:index]
 
       namespace :media do
         post 'upload_photo'
